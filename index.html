@@ -638,5 +638,96 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://panificiomatrisciano.it/#website",
+            "url": "https://panificiomatrisciano.it/",
+            "name": "Panificio Matrisciano",
+            "inLanguage": "it-IT"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://panificiomatrisciano.it/#webpage",
+            "url": "https://panificiomatrisciano.it/",
+            "mainEntity": { "@id": "https://panificiomatrisciano.it/#bakery" }
+            "name": "Panificio Matrisciano - Forno artigiano a Bologna",
+            "isPartOf": { "@id": "https://panificiomatrisciano.it/#website" },
+            "about": { "@id": "https://panificiomatrisciano.it/#bakery" }
+          },
+          {
+            "@type": "Bakery",
+            "@id": "https://panificiomatrisciano.it/#bakery",
+            "name": "Panificio Matrisciano",
+            "alternateName": "Panificio Matrisciano Salvatore",
+            "url": "https://panificiomatrisciano.it/",
+            "image": "https://panificiomatrisciano.it/images/panificiomatrisciano2.jpg",
+            "description": "Forno artigiano a Bologna con produzione propria. Specialità: pane, pizza e biscotti.",
+            "telephone": "+39 051 6345103",
+            "hasMap": "https://www.google.com/maps/search/?api=1&query=Panificio+Matrisciano+Via+Zanardi+83%2FC-D+Bologna",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": 4.4,
+              "bestRating": 5,
+              "ratingCount": 173
+            },
+            "priceRange": "€",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Via Zanardi 83/C-D",
+              "addressLocality": "Bologna",
+              "addressRegion": "BO",
+              "postalCode": "40131",
+              "addressCountry": "IT"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 44.5235,
+              "longitude": 11.3242
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "Bologna",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Bologna",
+                "addressRegion": "BO",
+                "addressCountry": "IT"
+              }
+            },
+            "sameAs": [
+              "https://www.facebook.com/panificiomatrisciano/",
+              "https://www.instagram.com/panificio_matrisciano/"
+            ],
+            "servesCuisine": [
+              "Bakery",
+              "Pizza",
+              "Bread",
+              "Pastry",
+              "Cookies"
+            ],
+            "foundingDate": "1969",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+                "opens": "07:00",
+                "closes": "21:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Sunday",
+                "opens": "08:00",
+                "closes": "13:30"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+
   </body>
 </html>
