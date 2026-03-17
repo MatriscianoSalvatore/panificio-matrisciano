@@ -396,6 +396,8 @@
 
         if (consent === 'accepted') {
           loadGoogleMaps();
+        } else if (window.location.hash === '#contact') {
+          showMapFallback();
         }
 
         var contattiLink = document.querySelector('nav a[href="#contact"]');
