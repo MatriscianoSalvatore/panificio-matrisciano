@@ -108,6 +108,11 @@
       text-align: center;
     }
     footer a { color: #666; }
+    .mobile-br { display: none; }
+    @media (max-width: 600px) {
+      .sep-dash { display: none; }
+      .mobile-br { display: block; }
+    }
     @media (max-width: 640px) {
       .container { padding: 1.5rem 1.25rem; }
       table { font-size: 0.78rem; }
@@ -313,7 +318,7 @@
 
     <footer>
       <p>
-        Panificio Matrisciano Salvatore &mdash; Via Zanardi 83/C-D, 40131 Bologna (BO)<br />
+        Panificio Matrisciano Salvatore<span class="sep-dash"> &mdash; </span><br class="mobile-br" />Via Zanardi 83/C-D, 40131 Bologna (BO)<br />
         P.IVA: 04236431203 &mdash; REA: BO-334531<br />
         <a href="index.html">Torna alla home</a>
       </p>

@@ -95,6 +95,11 @@
       }
       #cookie-accept:hover { background: #e8e8e8; }
       #cookie-decline:hover { border-color: #aaa; color: #fff; }
+      .mobile-br { display: none; }
+      @media (max-width: 600px) {
+        .sep-dash { display: none; }
+        .mobile-br { display: block; }
+      }
     </style>
   </head>
   <body class="is-preload">
@@ -330,10 +335,10 @@
       <!-- Footer -->
       <footer id="footer">
         <p class="copyright">
-          Panificio Matrisciano Salvatore &mdash; Via Zanardi 83/C-D, 40131 Bologna (BO)<br />
+          Panificio Matrisciano Salvatore<span class="sep-dash"> &mdash; </span><br class="mobile-br" />Via Zanardi 83/C-D, 40131 Bologna (BO)<br />
           P.IVA: 04236431203 &mdash; REA: BO-334531<br />
           <a href="privacy-policy.html">Privacy Policy e Cookie Policy</a>
-          &nbsp;&bull;&nbsp;
+          <span class="sep-dash">&nbsp;&bull;&nbsp;</span><br class="mobile-br" />
           <a href="https://salvatorematrisciano.com">&copy; Salvatore Matrisciano</a>
         </p>
       </footer>

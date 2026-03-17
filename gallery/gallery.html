@@ -150,14 +150,21 @@
 			</div>
 
 		<!-- Footer -->
+		<style>
+			.mobile-br { display: none; }
+			@media (max-width: 600px) {
+				.sep-dash { display: none; }
+				.mobile-br { display: block; }
+			}
+		</style>
 		<footer style="text-align:center; padding: 2rem 1rem; font-size: 0.82rem; color: #888; font-family: Arial, sans-serif;">
 			<p>
-				Panificio Matrisciano Salvatore &mdash; Via Zanardi 83/C-D, 40131 Bologna (BO)<br />
+				Panificio Matrisciano Salvatore<span class="sep-dash"> &mdash; </span><br class="mobile-br" />Via Zanardi 83/C-D, 40131 Bologna (BO)<br />
 				P.IVA: 04236431203 &mdash; REA: BO-334531<br />
 				<a href="../privacy-policy.html" style="color:#888;">Privacy Policy e Cookie Policy</a>
 				&nbsp;&bull;&nbsp;
 				<a href="../index.html" style="color:#888;">Home</a>
-				&nbsp;&bull;&nbsp;
+				<span class="sep-dash">&nbsp;&bull;&nbsp;</span><br class="mobile-br" />
 				<a href="https://salvatorematrisciano.com" style="color:#888;">&copy; Salvatore Matrisciano</a>
 			</p>
 		</footer>
