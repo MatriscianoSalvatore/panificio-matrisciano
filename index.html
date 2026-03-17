@@ -41,15 +41,107 @@
     /></noscript>
 
     <style>
+      #map-wrapper button {
+        box-shadow: none !important;
+      }
+      #map-wrapper::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.07);
+        pointer-events: none;
+        border-radius: 9px;
+        z-index: 1;
+      }
+      #map-wrapper {
+        border-radius: 9px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.38);
+        margin-bottom: 1.5em;
+        position: relative;
+      }
       #map {
         height: 400px;
         width: 100%;
-        border-radius: 4px;
-        overflow: hidden;
+        display: block;
+      }
+      /* Stile controlli Google Maps */
+      #map-wrapper .gm-bundled-control > .gmnoprint > div {
+        border-radius: 10px !important;
+        overflow: hidden !important;
+        background: rgba(28,28,28,0.92) !important;
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+      }
+      #map-wrapper .gm-bundled-control button.gm-control-active {
+        background: rgba(28,28,28,0.92) !important;
+      }
+      #map-wrapper .gm-bundled-control button.gm-control-active img {
+        filter: invert(1) !important;
+      }
+      #map-wrapper .gm-fullscreen-control {
+        background: rgba(28,28,28,0.92) !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+      }
+      #map-wrapper .gm-fullscreen-control img {
+        filter: invert(1) !important;
+      }
+      #map-wrapper .gm-style-mtc > button {
+        background: rgba(28,28,28,0.92) !important;
+        color: #fff !important;
+        border-radius: 8px !important;
+      }
+      #map-wrapper .gm-style-mtc ul {
+        background: rgba(30,30,30,0.7) !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+      }
+      #map-wrapper .gm-style-mtc ul li {
+        background: transparent !important;
+        color: #fff !important;
+        border-color: rgba(255,255,255,0.1) !important;
+      }
+      #map-wrapper .gm-style-mtc ul li * {
+        color: #fff !important;
+      }
+      #map-wrapper .gm-style-mtc input {
+        filter: invert(1) !important;
+      }
+      #map-wrapper .gm-style-mtc + .gm-style-mtc {
+        margin-left: 8px !important;
+      }
+      #map-wrapper .gm-svpc {
+        background: rgba(28,28,28,0.92) !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+      }
+      .info-card {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 9px;
+        padding: 0.85rem 1.1rem;
         margin-bottom: 2em;
+        font-size: 0.92rem;
+        color: rgba(255,255,255,0.82);
+      }
+      .info-card a {
+        color: rgba(255,255,255,0.82);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,0.3);
+      }
+      .info-card a:hover { color: #fff; border-color: #fff; }
+      .info-card .map-pin-icon {
+        font-size: 1.4rem;
+        flex-shrink: 0;
+        line-height: 1;
       }
 
-      /* Cookie banner */
+/* Cookie banner */
       #cookie-banner {
         position: fixed;
         bottom: 0;
@@ -255,16 +347,20 @@
         <!-- Contact -->
         <article id="contact">
           <h2 class="major">Orari di apertura</h2>
-          <ul>
-            <li>Lunedì - Sabato: 7:30 - 14:30, 17:00 - 20:30</li>
-            <li>Domenica: chiuso</li>
-          </ul>
-          <!-- <p>
-            Siamo aperti dal lunedì al sabato dalle 7 alle 21 e la domenica
-            dalle 8 alle 14.
-          </p> -->
+          <div class="info-card">
+            <span class="map-pin-icon">🕐</span>
+            <span>
+              Lunedì - Sabato: 7:30 - 14:30, 17:00 - 20:30<br>
+              Domenica: chiuso
+            </span>
+          </div>
 
           <h2 class="major">Contatti</h2>
+
+          <div class="info-card">
+            <span class="map-pin-icon">📞</span>
+            <span><a href="tel:+390516345103">051 6345103</a></span>
+          </div>
 
           <ul class="icons">
             <li>
@@ -288,43 +384,81 @@
             </li>
           </ul>
 
-          <p>Tel: <a href="tel:+390516345103">051 6345103</a></p>
-
           <h2 class="major">Dove siamo</h2>
 
-          <p>
-            <a
-              href="https://www.google.it/maps/place/Panificio+Matrisciano+Salvatore/@44.5147225,11.3204105,16.47z/data=!4m5!3m4!1s0x477fd383d117b6ef:0xef9209ab61b4fb07!8m2!3d44.5163697!4d11.3251379"
-            >
-              Bologna, Via Zanardi 83 C-D</a
-            >
-          </p>
-
-          <div id="map"></div>
+          <div class="info-card">
+            <span class="map-pin-icon">📍</span>
+            <span>
+              <a href="https://www.google.it/maps/place/Panificio+Matrisciano+Salvatore/@44.5147225,11.3204105,16.47z/data=!4m5!3m4!1s0x477fd383d117b6ef:0xef9209ab61b4fb07!8m2!3d44.5163697!4d11.3251379">
+                Via Zanardi 83/C-D, 40131 Bologna
+              </a>
+            </span>
+          </div>
+          <div id="map-wrapper">
+            <div id="map"></div>
+          </div>
           <script>
             function initMap() {
               var panificio = { lat: 44.516429, lng: 11.324999 };
+              var mapStyles = [
+                { featureType: "all", elementType: "geometry", stylers: [{ saturation: -30 }] },
+                { featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] },
+                { featureType: "transit", elementType: "labels", stylers: [{ visibility: "off" }] },
+                { featureType: "road", elementType: "geometry", stylers: [{ lightness: 10 }] },
+                { featureType: "water", elementType: "geometry", stylers: [{ color: "#c9d8e8" }] },
+                { featureType: "landscape", elementType: "geometry", stylers: [{ color: "#f2ede8" }] }
+              ];
               var map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 13,
                 center: panificio,
+                styles: mapStyles,
+                disableDefaultUI: true,
+                zoomControl: true,
+                zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
+                fullscreenControl: true,
+                fullscreenControlOptions: { position: google.maps.ControlPosition.TOP_RIGHT },
+                mapTypeControl: true,
+                mapTypeControlOptions: {
+                  position: google.maps.ControlPosition.TOP_LEFT,
+                  mapTypeIds: ['roadmap', 'hybrid'],
+                  style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                },
+                streetViewControl: true,
+                gestureHandling: 'cooperative',
               });
+              var pinSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="36" viewBox="0 0 36 52">' +
+                '<path fill-rule="evenodd" clip-rule="evenodd" d="M18 0C8.059 0 0 8.059 0 18c0 13.5 18 34 18 34S36 31.5 36 18C36 8.059 27.941 0 18 0z M18 26a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" fill="#c8762b" stroke="rgba(255,245,200,0.58)" stroke-width="1"/>' +
+                '</svg>';
               var marker = new google.maps.Marker({
                 position: panificio,
                 map: map,
                 title: "Panificio Matrisciano Salvatore",
+                icon: {
+                  url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(pinSvg),
+                  scaledSize: new google.maps.Size(26, 38),
+                  anchor: new google.maps.Point(13, 38),
+                },
               });
               var infoWindow = new google.maps.InfoWindow({
                 content:
-                  '<div style="font-family:Arial,sans-serif;font-size:0.9rem;line-height:1.6;padding:4px 2px;color:#222;">' +
-                  '<strong style="color:#111;">Panificio Matrisciano Salvatore</strong><br>' +
-                  '<span style="color:#444;">Via Zanardi 83/C-D, Bologna</span><br>' +
-                  '<a href="tel:+390516345103" style="color:#0055a5;">051 6345103</a><br>' +
-                  '<a href="https://www.google.it/maps/place/Panificio+Matrisciano+Salvatore/@44.5147225,11.3204105,16.47z/data=!4m5!3m4!1s0x477fd383d117b6ef:0xef9209ab61b4fb07!8m2!3d44.5163697!4d11.3251379" style="color:#0055a5;">Apri in Google Maps</a>' +
+                  '<div style="font-family:Arial,sans-serif;font-size:0.88rem;line-height:1.7;padding:6px 4px;color:#222;min-width:170px;">' +
+                  '<strong style="font-size:0.95rem;color:#111;display:block;margin-bottom:2px;">Panificio Matrisciano</strong>' +
+                  '<span style="color:#555;">Via Zanardi 83/C-D, Bologna</span><br>' +
+                  '<a href="tel:+390516345103" style="color:#c8762b;text-decoration:none;">☎ 051 6345103</a><br>' +
+                  '<a href="https://www.google.it/maps/place/Panificio+Matrisciano+Salvatore/@44.5147225,11.3204105,16.47z/data=!4m5!3m4!1s0x477fd383d117b6ef:0xef9209ab61b4fb07!8m2!3d44.5163697!4d11.3251379" style="color:#c8762b;text-decoration:none;font-size:0.82rem;">Apri in Google Maps ↗</a>' +
                   '</div>',
               });
               marker.addListener("click", function () {
                 infoWindow.open(map, marker);
               });
+              var mtcObserver = new MutationObserver(function () {
+                document.querySelectorAll('#map-wrapper .gm-style-mtc button, #map-wrapper .gm-style-mtc button span').forEach(function (el) {
+                  var t = el.childNodes[0] && el.childNodes[0].nodeType === 3 ? el.childNodes[0].nodeValue.trim() : el.innerText.trim();
+                  if (t === 'Hybrid' || t === 'Ibrida' || t === 'Mappa satellitare') { el.childNodes[0] ? el.childNodes[0].nodeValue = 'Satellite' : el.innerText = 'Satellite'; }
+                  if (t === 'Map') { el.childNodes[0] ? el.childNodes[0].nodeValue = 'Mappa' : el.innerText = 'Mappa'; }
+                });
+              });
+              mtcObserver.observe(document.getElementById('map'), { childList: true, subtree: true });
             }
           </script>
         </article>
@@ -383,14 +517,12 @@
         }
 
         function showMapFallback() {
-          if (mapEl) {
-            mapEl.style.height = 'auto';
-            mapEl.style.padding = '0';
-            mapEl.style.textAlign = 'center';
-            mapEl.innerHTML =
+          var wrapper = document.getElementById('map-wrapper');
+          if (wrapper) {
+            wrapper.innerHTML =
               '<a href="https://www.google.it/maps/place/Panificio+Matrisciano+Salvatore/@44.5147225,11.3204105,16.47z/data=!4m5!3m4!1s0x477fd383d117b6ef:0xef9209ab61b4fb07!8m2!3d44.5163697!4d11.3251379">' +
               '<img src="images/map.png" alt="Mappa Panificio Matrisciano Salvatore - Via Zanardi 83, Bologna" ' +
-              'style="width:100%;height:400px;object-fit:cover;display:block;border-radius:4px;" /></a>';
+              'style="width:100%;height:400px;object-fit:cover;display:block;" /></a>';
           }
         }
 
@@ -418,11 +550,8 @@
           e.stopPropagation();
           localStorage.setItem('cookie_consent', 'accepted');
           if (banner) banner.style.display = 'none';
-          if (mapEl) {
-            mapEl.style.height = '400px';
-            mapEl.style.padding = '0';
-            mapEl.innerHTML = '';
-          }
+          var wrapper = document.getElementById('map-wrapper');
+          if (wrapper) wrapper.innerHTML = '<div id="map"></div>';
           loadGoogleMaps();
         });
 
